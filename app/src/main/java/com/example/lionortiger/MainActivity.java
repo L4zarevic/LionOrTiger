@@ -2,7 +2,9 @@ package com.example.lionortiger;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -109,7 +111,26 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
+
+
         }
+
+        //Checking how many times player ONE has played
+        //If played 5 times, all fields are filled and there are no winners
+        int count = 0;
+        for (int i = 0; i < playerChoices.length; i++) {
+            if (playerChoices[i] == Player.ONE) {
+                count++;
+            }
+        }
+        if (count == 5) {
+            btnReset.setVisibility(View.VISIBLE);
+            gameOver = true;
+            Toast.makeText(this, "There are no winners", Toast.LENGTH_LONG).show();
+
+        }
+
+
     }
 
     //Reset Game Function
@@ -121,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageDrawable(null);
             imageView.setAlpha(0.2f);
         }
+
 
         //Resetting to default state
         currentPlayer = Player.ONE;
